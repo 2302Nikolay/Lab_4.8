@@ -8,7 +8,7 @@ class LandscapeApp:
         self.root = root
         self.root.title("Пейзаж")
 
-        self.canvas = tk.Canvas(root, width=400, height=300, bg="white")
+        self.canvas = tk.Canvas(root, width=400, height=300, bg="skyblue")
         self.canvas.pack()
 
         # Рисуем траву
@@ -23,13 +23,15 @@ class LandscapeApp:
     def draw_grass(self):
         grass_color = "green"
 
-        # Рисуем траву в виде полос
-        for y in range(200, 300, 10):
-            self.canvas.create_rectangle(0, y, 400, y + 5, fill=grass_color)
+        # Рисуем траву в виде зеленых пучков
+        for x in range(0, 400, 40):
+            self.canvas.create_polygon(
+                x, 200, x + 20, 180, x + 40, 200, fill=grass_color, outline=grass_color
+            )
 
     def draw_house(self):
-        house_color = "blue"
-        roof_color = "red"
+        house_color = "lightyellow"
+        roof_color = "brown"
 
         # Рисуем стены домика
         self.canvas.create_rectangle(100, 100, 300, 200, fill=house_color)
@@ -38,7 +40,7 @@ class LandscapeApp:
         self.canvas.create_polygon(100, 100, 200, 50, 300, 100, fill=roof_color)
 
     def draw_sun(self):
-        sun_color = "orange"
+        sun_color = "yellow"
         sun_radius = 30
         sun_center = (370, 30)
 

@@ -12,6 +12,15 @@ class ResizableTextApp:
         self.width_var = tk.StringVar()
         self.height_var = tk.StringVar()
 
+        # Многострочное текстовое поле
+        self.text_widget = tk.Text(root, wrap=tk.WORD, bg="lightgrey")
+        self.text_widget.pack(expand=True, fill=tk.BOTH)
+
+        # Полосы прокрутки для текстового поля
+        scroll_y = tk.Scrollbar(root, command=self.text_widget.yview)
+        scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
+        self.text_widget.config(yscrollcommand=scroll_y.set)
+
         # Создаем однострочные текстовые поля для ввода размеров
         self.width_entry = tk.Entry(root, textvariable=self.width_var)
         self.width_entry.pack(side=tk.LEFT, padx=10)
@@ -27,9 +36,7 @@ class ResizableTextApp:
         )
         self.resize_button.pack(side=tk.LEFT, padx=10)
 
-        # Многострочное текстовое поле
-        self.text_widget = tk.Text(root, wrap=tk.WORD, bg="lightgrey")
-        self.text_widget.pack(expand=True, fill=tk.BOTH)
+        # Привязываем события фокуса для изменения цвета фона
         self.text_widget.bind("<FocusIn>", self.on_focus_in)
         self.text_widget.bind("<FocusOut>", self.on_focus_out)
 
